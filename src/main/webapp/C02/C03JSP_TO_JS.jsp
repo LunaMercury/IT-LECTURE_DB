@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 
 <%
-String msg1 = "HELLO 1";
-String msg2 = "HELLO 2";
-String msg3 = "HELLO 3";
-String msg4 = "HELLO 4";
-String msg5 = "HELLO 5";
-request.setAttribute("message", "TEST");
+	String msg1 = "HELLO 1";
+	String msg2 = "HELLO 2";
+	String msg3 = "HELLO 3";
+	String msg4 = "HELLO 4";
+	String msg5 = "HELLO 5";
+	request.setAttribute("message", "TEST");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@ request.setAttribute("message", "TEST");
 		const message2 = '<%=msg2%>';		
 		const message3 = '<%=msg3%>';		
 		const message4 = '<%=msg4%>'; --%>
-		const message1 = '${message}';	
+		const message1 = '<%=msg1%>';	
 		const message2 = '${message2}';		
 		const message3 = `${message3}`; // 보간법(JSP의 message값을 리터럴 형태로 변환)		
 		const message4 = '<%=msg4%>';
