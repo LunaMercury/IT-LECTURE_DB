@@ -1,0 +1,6 @@
+ 12월 17일
+지난 시간
+visual studio code (구글 다운로드)
+웹 사용, 메모장
+<!--img태그 src속성-source(근원) -->
+

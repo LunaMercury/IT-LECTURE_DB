@@ -30,6 +30,7 @@
 		<main>
 			<section>SECTION 영역</section>
 		</main>
+		<%@ include file="./Layouts/Footer.jsp" %>
 		
 	</div>
 

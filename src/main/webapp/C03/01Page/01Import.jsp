@@ -7,6 +7,8 @@
 Scanner sc = new Scanner(System.in);
 
 C03SimpleDto dto = new C03SimpleDto("홍길동", 55, "대구");
+
+sc.close();
 %>
 
 <!DOCTYPE html>
