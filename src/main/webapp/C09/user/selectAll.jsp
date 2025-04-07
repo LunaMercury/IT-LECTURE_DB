@@ -44,7 +44,7 @@
 				<a href="./update_form.jsp?userid=<%=dto.getUserid() %>">수정하기</a>
 			</td>
 			<td>
-				<a href="./delete.jsp">삭제하기</a>
+				<a href="javascript:confirmDelete('<%=dto.getUserid() %>')">삭제하기</a>
 			</td>
 		</tr>		
 		<%
@@ -53,6 +53,12 @@
 		
 	</table>
 	
-	
+	<script>
+		function confirmDelete(userid){
+				const isDelete = confirm("정말 삭제하시겠습니까?");
+				if(isDelete)						
+					location.href='./delete.jsp?userid=' + userid;			
+		}
+	</script>
 </body>
 </html>
