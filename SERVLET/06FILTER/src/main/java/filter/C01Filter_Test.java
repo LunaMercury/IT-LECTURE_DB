@@ -13,12 +13,12 @@ import javax.servlet.annotation.WebFilter;
 public class C01Filter_Test implements Filter {
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		// REQUEST 전 처리코드
 		System.out.println("[FILTER] INDEX FILTER START");
 
-		chain.doFilter(request, response);
+		chain.doFilter(req, resp);
 
 		// REQUEST 후 처리코드
 		System.out.println("[FILTER] INDEX FILTER END");

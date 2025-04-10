@@ -7,10 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h1>JOIN PAGE</h1>
-	<form action="${ pageContext.request.contextPath }/join.do" method="post">
-		<input name="username" /> <br/>
-		<input name="password" /> <br/>		
+	<form action="${pageContext.request.contextPath}/join.do" method="post">
+		<input name="username" /><br/>
+		<input name="password" /><br/>
 		<button>회원가입</button>
 	</form>
 

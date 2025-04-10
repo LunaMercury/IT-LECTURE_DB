@@ -1,4 +1,4 @@
-package Servlets;
+package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import Utils.MysqlDbUtils;
 import Utils.UserDto;
 
-@WebServlet("/login.do")
+// @WebServlet("/login.do")
 public class Login extends HttpServlet {
 
 	private MysqlDbUtils dbUtils;

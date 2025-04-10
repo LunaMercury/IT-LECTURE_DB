@@ -25,7 +25,7 @@ public class C04Servlet_Test extends HttpServlet{
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 
-		// 입력값 검증
+		// 입력값 검증 (생략)
 		
 		// 작업 처리 -> 세션에 담기
 		HttpSession session = req.getSession();

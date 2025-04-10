@@ -1,4 +1,4 @@
-package Servlets;
+package servlet;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Utils.MysqlDbUtils;
 import Utils.UserDto;
 
-@WebServlet("/join.do")
+// @WebServlet("/join.do")
 public class Join extends HttpServlet{
 	
 	private MysqlDbUtils dbutils;
@@ -40,14 +40,14 @@ public class Join extends HttpServlet{
 		//파라미터 받기
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		System.out.println(username);
+		System.out.println("username : " + username);
 		System.out.println(password);
 		//유효성(생략)
 		
 		//처리작업(DB저장)
 		int result=0;
 		try {
-			result = dbutils.insert(new UserDto(username,password,"ROLE_USER"));
+			// result = dbutils.insert(new UserDto(username, password, "ROLE_USER"));
 		
 		} catch (Exception e) {
 			e.printStackTrace();
