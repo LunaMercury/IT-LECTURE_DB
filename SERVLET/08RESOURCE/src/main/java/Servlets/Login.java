@@ -1,4 +1,4 @@
-package servlet;
+package Servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -60,13 +60,13 @@ public class Login extends HttpServlet {
 		}
 		
 		// 뷰
-        if (!isAuth) {
-            resp.sendRedirect(req.getContextPath() + "/login.do?msg=login fail"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
-            return;
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/LoginRedirect"); // 로그인 성공 시 LoginRedirectFilter 실행
-            return;
-        }
+		if (isAuth) {
+			resp.sendRedirect(req.getContextPath()+"/main.do");
+			return;
+		} else {
+			req.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(req, resp);
+			return;
+		}
 
 	}
 

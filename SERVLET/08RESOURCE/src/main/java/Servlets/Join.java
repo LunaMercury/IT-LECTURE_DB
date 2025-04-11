@@ -1,4 +1,4 @@
-package servlet;
+package Servlets;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Utils.MysqlDbUtils;
 import Utils.UserDto;
 
-// @WebServlet("/join.do")
+@WebServlet("/join.do")
 public class Join extends HttpServlet{
 	
 	private MysqlDbUtils dbutils;
@@ -23,7 +23,6 @@ public class Join extends HttpServlet{
 			dbutils = MysqlDbUtils.getInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServletException("데이터베이스 연결 오류", e); // 서블릿 초기화 실패 시 예외 던지기			
 		}
 	}
 
@@ -41,20 +40,17 @@ public class Join extends HttpServlet{
 		//파라미터 받기
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		System.out.println("username : " + username);
-        System.out.println("password : " + password);
+		System.out.println(username);
+		System.out.println(password);
 		//유효성(생략)
 		
 		//처리작업(DB저장)
 		int result=0;
 		try {
-			result = dbutils.insert(new UserDto(username, password, "ROLE_USER"));
+			result = dbutils.insert(new UserDto(username,password,"ROLE_USER"));
 		
 		} catch (Exception e) {
-            e.printStackTrace();
-            req.setAttribute("errorMessage", "회원 가입 중 오류가 발생했습니다."); // 오류 메시지 설정
-            req.getRequestDispatcher("/WEB-INF/user/join.jsp").forward(req, resp);
-            return; // 오류 발생 시 더 이상 진행하지 않음
+			e.printStackTrace();
 		}
 
 		//뷰
