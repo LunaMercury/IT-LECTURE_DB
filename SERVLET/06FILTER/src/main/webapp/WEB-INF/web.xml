@@ -8,9 +8,20 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
+    <welcome-file>/WEB-INF/index.jsp</welcome-file>    
   </welcome-file-list>
   
   <!-- mapping -->
+  <servlet>
+  	<servlet-name>Home</servlet-name>
+  	<servlet-class>servlet.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Home</servlet-name>
+  	<url-pattern>/index.do</url-pattern>
+  	<url-pattern>/main.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>servlet.Login</servlet-class>
@@ -29,7 +40,7 @@
     <url-pattern>/join.do</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>AdminMain</servlet-name>
     <servlet-class>servlet.AdminMain</servlet-class>
   </servlet>
@@ -38,7 +49,7 @@
     <url-pattern>/admin_main</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>ManagerMain</servlet-name>
     <servlet-class>servlet.ManagerMain</servlet-class>
   </servlet>
@@ -47,7 +58,7 @@
     <url-pattern>/manager_main</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>UserMain</servlet-name>
     <servlet-class>servlet.UserMain</servlet-class>
   </servlet>
@@ -58,24 +69,25 @@
 
   <!-- filter -->
   <filter>
-    <filter-name>UTF8_EncodingFilter</filter-name>
-    <filter-class>filter.UTF8_EncodingFilter</filter-class>
+  	<filter-name>UTF8_EncodingFilter</filter-name>
+  	<filter-class>filter.UTF8_EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>UTF8_EncodingFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping>
+  	<filter-name>UTF8_EncodingFilter</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  </filter-mapping> 
   
-<!--   <filter>
+  <filter>
   	<filter-name>PermissionFilter</filter-name>
-  	<filter-class>filter.PermissionFilter</filter-class>  	
+  	<filter-class>filter.PermissionFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>PermissionFilter</filter-name>
   	<url-pattern>/admin_main</url-pattern>
   	<url-pattern>/manager_main</url-pattern>
-  	<url-pattern>/user_main</url-pattern>  	
-  </filter-mapping>
+  	<url-pattern>/user_main</url-pattern>
+  </filter-mapping>  
+  
   
   <filter>
   	<filter-name>LoginRedirectFilter</filter-name>
@@ -83,7 +95,7 @@
   </filter>
   <filter-mapping>
   	<filter-name>LoginRedirectFilter</filter-name>
-  	<url-pattern>/login.do</url-pattern> 
-  </filter-mapping> -->
+  	<url-pattern>/login.do</url-pattern>
+  </filter-mapping> 
   
 </web-app>

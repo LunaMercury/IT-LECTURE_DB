@@ -52,7 +52,6 @@ public class MysqlDbUtils {
 		if (rs != null) {
 			rs.next();
 			userDto = new UserDto(rs.getString(1), rs.getString(2), rs.getString(3));
-
 		}
 		return userDto;
 	}

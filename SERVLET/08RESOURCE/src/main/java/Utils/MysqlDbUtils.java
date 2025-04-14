@@ -20,6 +20,8 @@ public class MysqlDbUtils {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	// DataSource Resource 연결
+	// xml에 설정한 값을 이렇게 받는다.
 	private DataSource dataSource;
 
 	// 싱글톤

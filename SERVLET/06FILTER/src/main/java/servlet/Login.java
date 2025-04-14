@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import Utils.MysqlDbUtils;
 import Utils.UserDto;
 
-@WebServlet("/login.do")
+// @WebServlet("/login.do")
 public class Login extends HttpServlet {
 
 	private MysqlDbUtils dbUtils;
@@ -23,7 +23,6 @@ public class Login extends HttpServlet {
 		try {
 			dbUtils = MysqlDbUtils.getInstance();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -35,9 +34,10 @@ public class Login extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(req, resp);
 	}
 
-	// POST - /login.do - 회원가입처리(username,password 받아 DBUtils를 이용한 DB INSERT)
+	// POST - /login.do - 회원가입처리(username, password 받아 DBUtils를 이용한 DB INSERT)
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("POST /login.do");
 		// 파라미터 받기
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -60,13 +60,18 @@ public class Login extends HttpServlet {
 		}
 		
 		// 뷰
-        if (!isAuth) {
-            resp.sendRedirect(req.getContextPath() + "/login.do?msg=login fail"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
-            return;
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/LoginRedirect"); // 로그인 성공 시 LoginRedirectFilter 실행
-            return;
-        }
+//        if (isAuth) {
+//            resp.sendRedirect(req.getContextPath() + "/login.do?msg=login fail"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
+//            return;
+//        } else {
+//            resp.sendRedirect(req.getContextPath() + "/LoginRedirect"); // 로그인 성공 시 LoginRedirectFilter 실행
+//            return;
+//        }
+		if (!isAuth) {
+			req.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(req, resp);
+			return;
+		}
+	
 
 	}
 
