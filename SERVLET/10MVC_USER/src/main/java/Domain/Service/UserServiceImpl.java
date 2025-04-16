@@ -53,42 +53,43 @@ public class UserServiceImpl {
 		Map<String, Object> response = new LinkedHashMap<>(); // linkedhashmap은 좀 더 효율적이고 메모리 절약적이다.
 		UserDto userDb = userDao.select(userDto.getUsername()); // sql 질의 다수
 
-		try {
-			connectionPool.beginTransaction();
+//		try {
+//			connectionPool.beginTransaction();
 
-			if (userDb == null) {
+		if (userDb == null) {
+			response.put("isLogin", false);
+			response.put("message", "동일한 계정이 존재하지 않습니다.");
+		} else {
+			// 패스워드 일치여부 확인 (암호화 전)
+			if (!userDto.getPassword().equals(userDb.getPassword())) {
 				response.put("isLogin", false);
-				response.put("message", "동일한 계정이 존재하지 않습니다.");
+				response.put("message", "패스워드가 일치하지 않습니다.");
+
 			} else {
-				// 패스워드 일치여부 확인 (암호화 전)
-				if (!userDto.getPassword().equals(userDb.getPassword())) {
-					response.put("isLogin", false);
-					response.put("message", "패스워드가 일치하지 않습니다.");
-
-				} else {
-					session.setMaxInactiveInterval(60 * 10);
-					response.put("isLogin", true);
-					response.put("message", "로그인 성공");
-					session.setAttribute("isAuth", true);
-					session.setAttribute("username", userDb.getUsername());
-					session.setAttribute("role", userDb.getRole());
-				}
+				session.setMaxInactiveInterval(60 * 10);
+				response.put("isLogin", true);
+				response.put("message", "로그인 성공");
+				session.setAttribute("isAuth", true);
+				session.setAttribute("username", userDb.getUsername());
+				session.setAttribute("role", userDb.getRole());
 			}
-
-			connectionPool.commitTransaction();
-
-		} catch (SQLException e) {
-			connectionPool.rollbackTransaction();
 		}
+//
+//			connectionPool.commitTransaction();
+//
+//		} catch (SQLException e) {
+//			connectionPool.rollbackTransaction();
+//		}
 
 		return response;
 	}
-	
+
 	// 로그아웃 처리
-	public Map<String, Object> logout(HttpSession session){
+	public Map<String, Object> logout(HttpSession session) throws Exception {
 		Map<String, Object> response = new LinkedHashMap<>();
 		session.invalidate();
 		response.put("message", "로그아웃 성공");
+
 		return response;
 	}
 
