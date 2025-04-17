@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,19 +71,56 @@
 							<td colspan=3>
 								<nav aria-label="Page navigation example">
 								  <ul class="pagination">
-								    <li class="page-item">
-								      <a class="page-link" href="#" aria-label="Previous">
-								        <span aria-hidden="true">&laquo;</span>
-								      </a>
-								    </li>
-								    <li class="page-item"><a class="page-link" href="#">1</a></li>
-								    <li class="page-item"><a class="page-link" href="#">2</a></li>
-								    <li class="page-item"><a class="page-link" href="#">3</a></li>
-								    <li class="page-item">
-								      <a class="page-link" href="#" aria-label="Next">
-								        <span aria-hidden="true">&raquo;</span>
-								      </a>
-								    </li>
+								    <%
+								    	PageDto pageDto = request.getAttribute("pageDto")!=null?(PageDto)request.getAttribute("pageDto"):null;
+								    
+								    %>
+								    
+								    <%
+								    	if(pageDto!=null&&pageDto.isPrev())
+								    	{
+								    %>
+										    <!-- 이전버튼 -->
+										    <li class="page-item">
+										      <a class="page-link" href="#" aria-label="Previous">
+										        <span aria-hidden="true">&laquo;</span>
+										      </a>
+										    </li>
+								    <%
+								    	}
+								    %>
+								    
+									<%
+									System.out.println("pageDto : " + pageDto);
+									if(pageDto!=null)
+									{
+										int startNo = pageDto.getStartPage();
+										int endNo = pageDto.getEndPage();
+										System.out.println("STARTNO : " + startNo + " endNO : " + endNo);
+										for(int i=startNo;i<=endNo;i++)
+										{
+									%>
+								    	<li class="page-item"><a class="page-link" href="#"><%=i %></a></li>
+
+									<%
+										}
+									}
+									%>
+								    
+								    <%
+								    if(pageDto!=null&&pageDto.isNext())
+								    {
+								    %>
+									    <!-- 이후버튼 -->
+									    <li class="page-item">
+									      <a class="page-link" href="#" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+								    <%
+								    }
+								    %>
+								    
 								  </ul>
 								</nav>
 							
