@@ -11,7 +11,6 @@ import Domain.Dao.ConnectionPool.ConnectionItem;
 import Domain.Dao.ConnectionPool.ConnectionPool;
 import Domain.Dto.BookDto;
 import Domain.Dto.Criteria;
-import Domain.Dto.UserDto;
 
 public class BookDaoImpl implements BookDao {
 
@@ -119,18 +118,17 @@ public class BookDaoImpl implements BookDao {
 
 			// 아래 sql 코드로 인해, 4페이지를 누르면 31번 글부터 40번 글까지 10개가 나타난다.
 			String sql = "select * from tbl_book";
-			int parameterIndex = 1;
 
-			if (criteria.getType() != null && !criteria.getType().isEmpty() && criteria.getKeyword() != null
-					&& !criteria.getKeyword().isEmpty()) {
-				sql += " where " + criteria.getType() + " like ?";
+			boolean isgood = (criteria.getKeyword() != null && !criteria.getKeyword().trim().isEmpty());
+			if (isgood) {
+				sql += " where " + criteria.getType() + " like ? ";
 			}
 			sql += " order by bookCode desc limit ?,?";
 
 			pstmt = conn.prepareStatement(sql);
 
-			if (criteria.getType() != null && !criteria.getType().isEmpty() && criteria.getKeyword() != null
-					&& !criteria.getKeyword().isEmpty()) {
+			int parameterIndex = 1;
+			if (isgood) {
 				pstmt.setString(parameterIndex++, "%" + criteria.getKeyword() + "%");
 			}
 			pstmt.setInt(parameterIndex++, offset);
@@ -163,6 +161,46 @@ public class BookDaoImpl implements BookDao {
 		}
 	}
 
+	@Override
+	public int update(BookDto bookDto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(String bookcode) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BookDto select(String bookcode) throws Exception {
+		try {
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+
+			pstmt = conn.prepareStatement("select * from tbl_book where bookCode=?");
+			pstmt.setString(1, bookcode);
+			rs = pstmt.executeQuery();
+
+			BookDto bookDto = null;
+			if (rs != null && rs.next())
+				bookDto = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+
+			return bookDto;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("USERDAO's INSERT SQL EXCEPTION!!");
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+			connectionPool.releaseConnection(connectionItem);
+		}
+
+	}
+
 	// 총 게시물 갯수(페이지 갯수가 아님. 글의 갯수)
 	@Override
 	public long count(String type, String keyword) throws Exception {
@@ -176,9 +214,11 @@ public class BookDaoImpl implements BookDao {
 			if (type != null && !type.isEmpty() && keyword != null && !keyword.isEmpty()) {
 				sql += " where " + type + " like ?";
 			}
-			///////////////////// 이 근처 부분 다시 원래대로 되돌리고 Controller 의 Criteria 를 if 문 넣어서 초기값 잡기
 			pstmt = conn.prepareStatement(sql);
-			
+
+			if (type != null && !type.isEmpty() && keyword != null && !keyword.isEmpty()) {
+				pstmt.setString(1, "%" + keyword + "%");
+			}
 
 			rs = pstmt.executeQuery();
 
@@ -199,23 +239,4 @@ public class BookDaoImpl implements BookDao {
 			connectionPool.releaseConnection(connectionItem);
 		}
 	}
-
-	@Override
-	public int update(BookDto bookDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete(BookDto bookDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public UserDto select(BookDto bookDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

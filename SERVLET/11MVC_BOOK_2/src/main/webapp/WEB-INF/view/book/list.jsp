@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<!-- 책 목록이 아닌 페이지 정보만 받는다. -->
+	<!-- 책 목록이 아닌 페이지 정보만 받는다. 초기 접속시 null읻 -->
 	<%
 	PageDto pageDto = request.getAttribute("pageDto") != null ? (PageDto) request.getAttribute("pageDto") : null;
 	%>
@@ -48,7 +48,7 @@
 						<%@page import="java.util.*,Domain.Dto.*"%>
 						<%
 						List<BookDto> list = request.getAttribute("list") != null ? (List<BookDto>) request.getAttribute("list") : null;
-						if (list == null)
+						if (pageDto.getTotalCount()==0)
 							out.println("<td colspan=4>조회할 데이터가 없습니다</td>");
 						else {
 							for (BookDto dto : list) {

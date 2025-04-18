@@ -30,7 +30,7 @@ public class PageDto {
 		this.criteria = criteria;
 
 		// 전체 페이지 계산
-		// 즉, 게시물 총 갯수/페이지 당 보여줄 갯수 = 페이지 갯수
+		// 즉, 게시물 총 갯수/페이지 당 보여줄 갯수 = 페이지 갯수(블럭)
 		totalPage = (int) Math.ceil((1.0 * totalcount) / criteria.getAmount());
 
 		// 블럭계산
