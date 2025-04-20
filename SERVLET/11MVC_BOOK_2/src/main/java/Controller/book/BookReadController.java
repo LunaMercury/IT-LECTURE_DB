@@ -26,11 +26,12 @@ public class BookReadController implements SubController {
 		System.out.println("[SC] BookReadController execute..");
 
 		try {
+			// 파라미터 받기
 			String bookCode = req.getParameter("bookCode");
 			String pageno = req.getParameter("pageno");
 			
+			// 유효성 체크
 			if(!isValid(bookCode)) {
-//				req.setAttribute("message", "유효성 체크 오류!");
 				resp.sendRedirect(req.getContextPath()+"/book/list");
 			}
 			
@@ -56,6 +57,7 @@ public class BookReadController implements SubController {
 	// 유효성 검사 함수
 	private boolean isValid(String bookCode) {
 		if (bookCode.isEmpty()) {
+			System.out.println("[BC] BookCode 유효성 오류");
 			req.setAttribute("bookCode", "BookCode 유효성 오류");
 		}
 		return true;

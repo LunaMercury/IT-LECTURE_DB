@@ -163,16 +163,58 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public int update(BookDto bookDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+
+			pstmt = conn
+					.prepareStatement("UPDATE tbl_book SET bookName = ?, publisher = ?, isbn = ? WHERE bookCode = ?");
+			pstmt.setString(1, bookDto.getBookName());
+			pstmt.setString(2, bookDto.getPublisher());
+			pstmt.setString(3, bookDto.getIsbn());
+			pstmt.setString(4, bookDto.getBookCode());
+
+			return pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException("BOOKDAO's INSERT SQL EXCEPTION!!");
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+			// connection release
+			connectionPool.releaseConnection(connectionItem);
+		}
 	}
 
 	@Override
-	public int delete(String bookcode) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(String bookcode) throws Exception {
+		try {
+			// connection get
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+
+			pstmt = conn.prepareStatement("delete from tbl_book where bookCode=?");
+			pstmt.setString(1, bookcode);
+
+			return pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("BOOKDAO's DELETE SQL EXCEPTION!!");
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+			// connection release
+			connectionPool.releaseConnection(connectionItem);
+		}
 	}
 
+	// 단건조회
 	@Override
 	public BookDto select(String bookcode) throws Exception {
 		try {

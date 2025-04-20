@@ -13,11 +13,11 @@ public interface BookDao {
 
 	int update(BookDto bookDto) throws SQLException;
 
-	int delete(String bookcode) throws SQLException;
+	int delete(String bookcode) throws Exception;
 	
 	//단건조회
-
 	public BookDto select(String bookcode) throws Exception;
+	
 	//다건조회
 	public List<BookDto> selectAll() throws Exception;
 

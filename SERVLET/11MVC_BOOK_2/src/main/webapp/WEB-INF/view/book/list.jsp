@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<!-- 책 목록이 아닌 페이지 정보만 받는다. 초기 접속시 null읻 -->
+	<!-- 책 목록이 아닌 페이지 정보만 받는다. 초기 접속시 null 임 -->
 	<%
 	PageDto pageDto = request.getAttribute("pageDto") != null ? (PageDto) request.getAttribute("pageDto") : null;
 	%>
@@ -56,7 +56,7 @@
 						<tr>
 							<td><%=dto.getBookCode()%></td>
 							<td>
-								<a href="${pageContext.request.contextPath}/book/read?bookCode=<%=dto.getBookCode()%>">
+								<a href="${pageContext.request.contextPath}/book/read?bookCode=<%=dto.getBookCode()%>&pageno=<%=pageDto.getCriteria().getPageno()%>">
 									<%=dto.getBookName()%>
 								</a>
 								

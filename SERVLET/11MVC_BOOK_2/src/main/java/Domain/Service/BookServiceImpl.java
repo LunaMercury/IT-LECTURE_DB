@@ -61,8 +61,8 @@ public class BookServiceImpl {
 		// PageDto, endPage 및 startPage 값을 계산하기 위해
 		String type = criteria.getType();
 		String keyword = criteria.getKeyword();
-		System.out.println("BookService 타입, 키워드 : "+type+keyword);
-		long totalCount = bookDao.count(type,keyword); // 총 목록갯수
+		System.out.println("BookService 타입, 키워드 : " + type + keyword);
+		long totalCount = bookDao.count(type, keyword); // 총 목록갯수
 		PageDto pageDto = new PageDto(totalCount, criteria);
 		System.out.println("Service pageDto : " + pageDto);
 
@@ -77,33 +77,34 @@ public class BookServiceImpl {
 
 		return response;
 	}
-	
-	public Map<String, Object> getBook(String bookCode) throws Exception{
-		
+
+	public Map<String, Object> getBook(String bookCode) throws Exception {
+
 		Map<String, Object> response = new LinkedHashMap();
-		
-		BookDto bookDto =  bookDao.select(bookCode);
-		
-		if(bookDto == null)
+
+		BookDto bookDto = bookDao.select(bookCode);
+
+		if (bookDto == null)
 			response.put("status", false);
 		else {
 			response.put("status", true);
 			response.put("bookDto", bookDto);
-		}		
+		}
 		return response;
 	}
-	public boolean modifyBook(BookDto bookDto) throws Exception{
+
+	public boolean modifyBook(BookDto bookDto) throws Exception {		
 		
 		int result = bookDao.update(bookDto);
 
-		return result>0;
+		return result > 0;
 	}
-	
-	public boolean removeBook(String bookCode) throws Exception{
-		
+
+	public boolean removeBook(String bookCode) throws Exception {
+
 		int result = bookDao.delete(bookCode);
 
-		return result>0;
+		return result > 0;
 	}
 
 }

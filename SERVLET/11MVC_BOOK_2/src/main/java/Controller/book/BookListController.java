@@ -36,12 +36,8 @@ public class BookListController implements SubController {
 			String keyword = req.getParameter("keyword"); // 키워드 검색 시 사용
 
 			HttpSession session = req.getSession();
-			System.out.println("[BookListCtrl]" + session.getAttribute("searchKeyword"));
-			System.out.println("[BookListCtrl]" + session.getAttribute("searchType"));
-
-			if (type != null) {
-
-			}
+			System.out.println("[BookListCtrl] session" + session.getAttribute("searchKeyword"));
+			System.out.println("[BookListCtrl] session" + session.getAttribute("searchType"));
 
 			if (session.getAttribute("searchKeyword") != null && keyword == null) {
 				keyword = (String) session.getAttribute("searchKeyword");

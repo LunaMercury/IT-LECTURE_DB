@@ -8,10 +8,14 @@ import Domain.Dto.BookDto;
 import Domain.Service.BookServiceImpl;
 
 public class BookUpdateController implements SubController {
-	HttpServletRequest req;
-	HttpServletResponse resp;
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
 	private BookServiceImpl bookService;
 
+	public BookUpdateController() throws Exception {
+		this.bookService = BookServiceImpl.getInstance();
+	}
+	
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
@@ -21,18 +25,15 @@ public class BookUpdateController implements SubController {
 		String uri = req.getMethod();
 
 		try {
-			if (uri.equals("GET")) {
-				req.getRequestDispatcher("/WEB-INF/view/book/read.jsp").forward(req, resp);
-			}
-
 			// 파라미터
 			String bookCode = req.getParameter("bookCode");
 			String bookName = req.getParameter("bookName");
 			String publisher = req.getParameter("publisher");
 			String isbn = req.getParameter("isbn");
-			BookDto bookDto = new BookDto(bookCode, bookName, publisher, isbn);
-
-//			String pageno = req.getAttribute("pageDto");
+			String pageno = (String) req.getAttribute("pageDto")!=null?req.getParameter("pageno"):"1";
+			System.out.println("bookUpdate pageno"+pageno);
+			
+			BookDto bookDto = new BookDto(bookCode, bookName, publisher, isbn);			
 
 			// 유효성 검사
 			if (!isValid(bookDto)) {
@@ -50,13 +51,25 @@ public class BookUpdateController implements SubController {
 			resp.sendRedirect(req.getContextPath() + "/book/list?pageno=" + pageno);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			exceptionHandler(e);
+			try {
+				req.getRequestDispatcher("/WEB-INF/view/book/error.jsp").forward(req, resp);
+			} catch (Exception e2) {
+			}
+			
 		}
 	}
 
 	private boolean isValid(BookDto bookDto) {
 
 		return true;
+	}
+	
+	// 예외처리함수
+	public void exceptionHandler(Exception e) {
+		req.setAttribute("status", false);
+		req.setAttribute("message", e.getMessage());
+		req.setAttribute("exception", e);
 	}
 
 }

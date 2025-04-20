@@ -5,7 +5,7 @@ public class PageDto {
 
 	private long totalCount;
 	// 페이지정보(전체페이지,현재페이지)
-	private int totalPage; // 총게시물건수 / amount
+	private int totalPage; // 페이지 갯수 = (총게시물건수 / amount)
 	private Criteria criteria; // 현재페이지,한페이지당 읽을 게시물의 건수가 저장되어있음
 
 	// 블럭정보
@@ -154,6 +154,5 @@ public class PageDto {
 				+ ", pagePerBlock=" + pagePerBlock + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock
 				+ ", startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + "]";
 	}
-	
 
 }
