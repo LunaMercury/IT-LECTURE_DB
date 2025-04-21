@@ -30,8 +30,8 @@ public class BookUpdateController implements SubController {
 			String bookName = req.getParameter("bookName");
 			String publisher = req.getParameter("publisher");
 			String isbn = req.getParameter("isbn");
-			String pageno = (String) req.getAttribute("pageDto")!=null?req.getParameter("pageno"):"1";
-			System.out.println("bookUpdate pageno"+pageno);
+			String pageno = req.getParameter("pageno")!=null?req.getParameter("pageno"):"1";
+			System.out.println("bookUpdate pageno : " + pageno);
 			
 			BookDto bookDto = new BookDto(bookCode, bookName, publisher, isbn);			
 

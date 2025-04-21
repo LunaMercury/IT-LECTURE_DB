@@ -27,7 +27,7 @@ public class BookDeleteController implements SubController{
 		try {
 			// 파라미터
 			String bookCode = req.getParameter("bookCode");
-			String pageno = (String) req.getAttribute("pageDto")!=null?req.getParameter("pageno"):"1";
+			String pageno = req.getParameter("pageno")!=null?req.getParameter("pageno"):"1";
 
 			// 유효성 검사
 			if (!isValid(bookCode)) {

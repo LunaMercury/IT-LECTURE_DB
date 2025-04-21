@@ -28,7 +28,7 @@ public class BookReadController implements SubController {
 		try {
 			// 파라미터 받기
 			String bookCode = req.getParameter("bookCode");
-			String pageno = req.getParameter("pageno");
+			String pageno = req.getParameter("pageno");			
 			
 			// 유효성 체크
 			if(!isValid(bookCode)) {

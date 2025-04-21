@@ -53,7 +53,7 @@ public class FrontController extends HttpServlet{
 			map.put("/book/create", new BookCreateController());
 			map.put("/book/read", new BookReadController());
 			map.put("/book/update", new BookUpdateController());
-//			map.put("/book/delete", new BookDeleteController());
+			map.put("/book/delete", new BookDeleteController());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
