@@ -1,1 +1,3 @@
+com\example\app\domain\dto\PersonDto$PersonDtoBuilder.class
 com\example\app\HomeController.class
+com\example\app\domain\dto\PersonDto.class
