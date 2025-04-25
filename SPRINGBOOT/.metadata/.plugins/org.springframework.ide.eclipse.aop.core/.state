@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="ex02_parameter"/>
+<aop-project name="ex06_mybatis-practice"/>
 <aop-project name="ex05_dataSource-practice"/>
-<aop-project name="ex02_parameter-practice"/>
-<aop-project name="ex01_rombok_id-practice"/>
-<aop-project name="ex01_lombok_id"/>
-<aop-project name="ex03_dataValidation-practice"/>
-<aop-project name="ex03_dataValidation"/>
-<aop-project name="ex00_init-practice"/>
-<aop-project name="ex04_exception-practice"/>
 </aop-reference-model>

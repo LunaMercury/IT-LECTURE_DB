@@ -31,6 +31,6 @@ public class MemoDto {
 	@NotNull(message = "날짜 정보를 선택해주세요")
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") // T는 오전,오후
 	private LocalDateTime createAt;
-	@NotNull(message = "날짜를 입력하세요")
+//	@NotNull(message = "날짜를 입력하세요")
 	private LocalDate dateTest;
 }
