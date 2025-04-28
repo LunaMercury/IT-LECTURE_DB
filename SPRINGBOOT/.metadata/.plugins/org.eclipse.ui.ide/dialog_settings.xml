@@ -111,6 +111,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Administrator\Desktop\SpringBoot lecture\ex08_restController"/>
 			<item value="C:\Users\Administrator\Desktop\SpringBoot lecture\ex03_dataValidation"/>
 			<item value="C:\Users\Administrator\Desktop\SpringBoot lecture\ex02_parameter"/>
 			<item value="C:\Users\Administrator\Desktop\SpringBoot practice\ex02_parameter"/>
