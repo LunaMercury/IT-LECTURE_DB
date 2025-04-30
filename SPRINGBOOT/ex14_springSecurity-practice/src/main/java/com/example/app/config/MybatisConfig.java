@@ -33,11 +33,12 @@ public class MybatisConfig {
 	// sqlSession 생성
 	// -----------------------
 	// 위의 sqlSessionFactory() 를 그대로 쓰는 방법도 있다. 상세한 방법은 못들음
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
+	
+//	  @Autowired private SqlSessionFactory sqlSessionFactory;
+	 
 
 	@Bean
-	public SqlSessionTemplate sqlSessionTemplate() {
-		return new SqlSessionTemplate(sqlSessionFactory);
+	public SqlSessionTemplate sqlSessionTemplate() throws Exception{
+		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 }

@@ -1,9 +1,12 @@
 com\example\app\domain\mapper\MemoMapper.class
 com\example\app\controller\UserController$BirthdayEditor.class
 com\example\app\domain\dto\MemoDto.class
+com\example\app\config\auth\PrincipalDetailsService.class
 com\example\app\domain\dto\PersonDto.class
 com\example\app\controller\ParameterTestController.class
 com\example\app\controller\MemoController$DateTestEditor.class
+com\example\app\config\auth\PrincipalDetails.class
+com\example\app\config\SecurityConfig.class
 com\example\app\controller\exception\GlobalExceptionHandler.class
 com\example\app\controller\HomeController.class
 com\example\app\controller\MemoController.class
@@ -16,6 +19,7 @@ com\example\app\config\PersonDtoBeanConfig.class
 com\example\app\domain\dao\MemoDaoImpl.class
 com\example\app\controller\SimpleController.class
 com\example\app\controller\UserController$PhoneNumberEditor.class
+com\example\app\domain\service\UserServiceImpl.class
 com\example\app\config\DataSourceConfig.class
 com\example\app\controller\UserController.class
 com\example\app\config\PersonComponent.class
