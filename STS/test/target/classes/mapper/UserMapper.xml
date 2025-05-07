@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.app.domain.mapper.UserMapper">
+<!-- 
+	<insert id="userInsertXml">
+		insert into tbl_user (userid, username, password)
+		values (#{userid}, #{username}, #{password})
+	</insert>
+
+	<update id="userUpdateXml">
+		update tbl_user set password=#{password} where
+		userid=#{userid}
+	</update>
+
+	<delete id="userDeleteXml">
+		delete from tbl_user where userid=#{userid}
+	</delete>
+
+	<select id="userSelectAtXml"
+		resultMap="com.example.app.domain.dto.UserDto" parameterType="String">
+		select *
+		from tbl_user where userid=#{userid}
+	</select>
+
+	<select id="userSelectAllXml"
+		resultType="com.example.app.domain.dto.UserDto">
+		select * from tbl_user
+	</select>
+
+	<select id="userSelectAllResultXml" resultType="java.util.Map">
+		select * from
+		tbl_user
+	</select> -->
+</mapper>
