@@ -1,0 +1,3 @@
+INSERT ignore INTO tbl_a VALUES(1,111);
+INSERT ignore INTO tbl_a VALUES(2,222);
+INSERT ignore INTO tbl_a VALUES(3,333);

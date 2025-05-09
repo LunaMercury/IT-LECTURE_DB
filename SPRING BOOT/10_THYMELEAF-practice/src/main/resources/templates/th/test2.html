@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!-- 헤더 영역 -->
+  <div th:insert="~{th/fragments/header::headerFragment}"></div>
+
+  <h1>TEST 2</h1>
+
+  <!-- 푸터 영역 -->
+  <div th:replace="~{th/fragments/footer::footerFragment}"></div>
+
+</body>
+</html>
