@@ -20,7 +20,7 @@ import java.util.List;
 public class OpenData01Controller {
 
     String url = "https://apis.data.go.kr/6270000/service/rest/dgincident";
-    String serviceKey = "보안보안보안보안";
+    String serviceKey = "HuCVWyilOTqxMrP/q3s2wk0DZgsf/KeEnFylSDMmws0IyE8E5dSlPrZkXLWGh8M2G98YRViid4NmtXjVJuER4w==";
     String pageNo = "1";
     String numOfRows = "10";
 

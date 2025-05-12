@@ -4,51 +4,52 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
 @RequestMapping("/openData")
 public class OpenData02Controller {
 
-    String url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
-    String serviceKey = "보안보안보안보안";
+    String url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+    String serviceKey = "HuCVWyilOTqxMrP/q3s2wk0DZgsf/KeEnFylSDMmws0IyE8E5dSlPrZkXLWGh8M2G98YRViid4NmtXjVJuER4w==";
     String pageNo = "1";
     String numOfRows = "10";
-    String base_date = "20250509";
-    String base_time = "1600";
     String dataType = "JSON";
-    String nx = "89";
-    String ny = "90";
+    String base_date = "20250512";
+    String base_time = "0900";
+    String nx = "60";
+    String ny = "127";
 
     @GetMapping("/forecast")
-    public void forecast(Model model) {
+    public String forecast(Model model) {
         log.info("GET /openData/forecast...");
 
         // 서버정보
-        url += "?serviceKey=" + serviceKey;
-        url += "&pageNo=" + pageNo;
-        url += "&numOfRows=" + numOfRows;
-        url += "&base_date=" + base_date;
-        url += "&base_time=" + base_time;
-        url += "&dataType=" + dataType;
-        url += "&nx=" + nx;
-        url += "&ny=" + ny;
+        String fullUrl = url + "?serviceKey=" + serviceKey
+                + "&pageNo=" + pageNo
+                + "&numOfRows=" + numOfRows
+                + "&base_date=" + base_date
+                + "&base_time=" + base_time
+                + "&dataType=" + dataType
+                + "&nx=" + nx
+                + "&ny=" + ny;
 
         // 요청 헤더
+        log.info("요청 URL: " + fullUrl);
 
         // 요청 바디
 
         // 요청 -> 응답
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Root> response = rt.exchange(url, HttpMethod.GET, null, Root.class);
+        ResponseEntity<Root> response = rt.exchange(fullUrl, HttpMethod.GET, null, Root.class);
         System.out.println(response);
 
         // 데이터 가공
@@ -66,6 +67,8 @@ public class OpenData02Controller {
         }
         log.info("isOk : " + model.getAttribute("isOk"));
         model.addAttribute("list",list);
+
+        return "openData/forecast";
 
     }
 

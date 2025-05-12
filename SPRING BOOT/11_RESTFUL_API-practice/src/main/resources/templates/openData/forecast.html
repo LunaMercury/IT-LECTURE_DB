@@ -2,22 +2,26 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>날씨 정보</title>
 </head>
 <body>
 <h1>날씨정보</h1>
 <hr>
-<th:block th:if="${isOk}" th:each="item:${list}">
-    <p>
-    <div th:text="${item.baseData}"></div>
-    <div th:text="${item.baseTime}"></div>
-    <div th:text="${item.category}"></div>
-    <div th:text="${item.obsrValue}"></div>
-    </p>
-</th:block>
-<th:block th:unless="${isOk}">
-    <div>NONE</div>
-</th:block>
+
+<!-- 데이터가 있을 경우 -->
+<div th:if="${isOk}">
+    <div th:each="item : ${list}" style="margin-bottom: 10px; border-bottom: 1px solid #ccc; padding: 5px;">
+        <div>날짜: <span th:text="${item.baseDate}"></span></div>
+        <div>시간: <span th:text="${item.baseTime}"></span></div>
+        <div>항목: <span th:text="${item.category}"></span></div>
+        <div>값: <span th:text="${item.obsrValue}"></span></div>
+    </div>
+</div>
+
+<!-- 데이터가 없을 경우 -->
+<div th:unless="${isOk}">
+    <p>데이터가 없습니다.</p>
+</div>
 
 </body>
 </html>

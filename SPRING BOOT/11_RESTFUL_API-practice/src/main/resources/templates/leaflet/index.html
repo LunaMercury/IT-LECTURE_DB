@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- leaflet CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Leaflet Plugins: Leaflet.KoreanTmsProviders 추가  -->
+    <script src="/js/KoreanTmsProviders/lib/proj4.js"></script>
+    <script src="/js/KoreanTmsProviders/lib/proj4leaflet.js"></script>
+    <script src="/js/KoreanTmsProviders/src/Leaflet.KoreanTmsProviders.js"></script>
+
+    <!--  axios CDN  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+            integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+<!--<h1>LEAFLET PAGE</h1>-->
+
+<div id="map" style="height: 100vh; width:100%;"></div>
+
+<script>
+    // 기존 leaflet 스타일
+<!--        // initialize the map on the "map" div with a given center and zoom-->
+<!--        var map = L.map('map', {-->
+<!--            center: [51.505, -0.09],-->
+<!--            zoom: 13-->
+<!--        });-->
+
+<!--        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+<!--        maxZoom: 19,-->
+<!--        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'-->
+<!--    }).addTo(map);-->
+
+    // 지도 기본타일 적용
+    var map = new L.Map('map', {
+          center: new L.LatLng(35.866056, 128.593837), //중심점 : 대구
+          zoom: 8,	//Leaflet.KoreanTmsProviders.js : resolutions기준 줌 레벨(Level 12)
+          crs: L.Proj.CRS.Daum, //Leaflet.KoreanTmsProviders.js : 새로 정의된 Daum Map CRS
+          worldCopyJump: false,  //https://leafletjs.com/reference-1.3.2.html#map-worldcopyjump 참조
+    });
+    var baseLayers = L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
+
+    // 마커 추가
+    const centerMarker = L.marker([35.866056, 128.593837]).addTo(map);
+    // 툴팁 추가 (마우스 올리면 텍스트 뜸)
+    centerMarker.bindTooltip("my tooltip text", {direction : 'top', offset : [-15, -15]}).openTooltip();
+    // 팝업 추가 (클릭하면 뜸)
+    const popupContent = '<div>TEST</test>';
+    centerMarker.bindPopup(popupContent);
+    // 마커 클릭 이벤트
+    centerMarker.on('click', function(e) {
+        console.log('click', e);
+    });
+    centerMarker.on('mouseover', function(e) {
+        console.log('mouseover', e);
+    });
+
+    // 지도 클릭 이벤트
+    map.on('click', function(e) {
+        console.log('map', e.latlng.lat, e.latlng.lng);
+
+        axios.get(`/open/weather/get/${e.latlng.lat}/${e.latlng.lng}`)
+            .then(resp=>{console.log(resp)})
+            .catch(error=>{console.log(error)});
+        // 마커 추가
+        const newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+        newMarker.bindTooltip("my tooltip text", {direction : 'top', offset : [-15, -15]}).openTooltip();
+        // 툴팁 추가 (마우스 올리면 텍스트 뜸)
+        newMarker.bindTooltip("my tooltip text", {direction : 'top', offset : [-15, -15]}).openTooltip();
+        // 팝업 추가 (클릭하면 뜸)
+        const popupContent = '<div>TEST</test>';
+        newMarker.bindPopup(popupContent);
+        // 마커 클릭 이벤트
+        newMarker.on('click', function(e) {
+            console.log('click', e);
+        });
+    });
+
+    // 지도 위 구역 설정
+    const geojsonData = {
+        "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [128.532719,35.829890]
+                    },
+                    "properties": {
+                        "name": "부산",
+                        "description": "부산광역시 중심"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [128.59366576171507, 35.867019778863835],
+                                [128.59359265078618, 35.86613312243567],
+                                [128.59431032153893, 35.86548378642922],
+                            ]
+                        ]
+                    },
+                    "properties": {
+                        "name": "Polygon Example",
+                        "description": "샘플 폴리곤 영역"
+                    }
+                }
+            ]
+        };
+        //GEOJSON
+        L.geoJSON(geojsonData, {
+            style: function (feature) {
+                   return {
+                    color: 'blue',
+                    fillColor: 'yellow',
+                    fillOpacity: 0.5,
+                    weight: 2
+                };
+            }
+        }).bindPopup(function (layer) {
+            return layer.feature.properties.description;
+        }).addTo(map);
+
+    //법정동 지도 추가
+    // 대한민국 법정동 지도 : https://github.com/raqoon886/Local_HangJeongDong
+    // 대한민국 행정동 경계파일 : https://github.com/vuski/admdongkor
+    const borderColors = {
+        "중구":"red",
+        "동구":"orange",
+        "서구":"yellow",
+        "남구":"green",
+        "북구":"blue",
+        "수성구":"navy",
+        "달서구":"black",
+        "달성군":"royalblue",
+    }
+    axios.get("/geoJson/daegu.json")
+        .then(resp=>{
+            console.log("GEOJSON",resp)
+            const HangjungdongAllData = resp.data.features;
+            const groupMap = {};
+            HangjungdongAllData.forEach(item=>{
+                //console.log(item);
+
+                if(!groupMap[item.properties.sggnm])
+                    groupMap[item.properties.sggnm]=[]
+                groupMap[item.properties.sggnm].push(item);
+            })
+            //console.log('groupMap',groupMap);
+
+            Object.entries(groupMap).forEach((group)=>{
+              //GEOJSON
+              console.log(group[0],group[1]);
+              L.geoJSON(group[1], {
+                    style: function (feature) {
+                           return {
+                            color: borderColors[group[0]],
+                            fillColor: borderColors[group[0]],
+                            fillOpacity: 0.2,
+                            weight: 3
+                        };
+                    }
+                }).bindPopup(function (layer) {
+                    return layer.feature.properties.description;
+                }).addTo(map);
+            })
+        })
+    .catch(error=>{console.log(error)})
+
+</script>
+</body>
+</html>
