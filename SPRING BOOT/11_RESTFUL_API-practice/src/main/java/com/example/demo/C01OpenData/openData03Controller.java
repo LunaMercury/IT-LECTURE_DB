@@ -23,7 +23,7 @@ public class openData03Controller {
     @GetMapping("/bus/realtime")
     public void bus_realtime() throws UnsupportedEncodingException {
         String url = "https://apis.data.go.kr/6270000/dbmsapi01/getRealtime";
-        String serviceKey = "HuCVWyilOTqxMrP/q3s2wk0DZgsf/KeEnFylSDMmws0IyE8E5dSlPrZkXLWGh8M2G98YRViid4NmtXjVJuER4w==";
+        String serviceKey = System.getenv("KR_OPENDATA_API_KEY_DECODING");
         String bsId = "7001001600";
         String routeNo = "649";
 

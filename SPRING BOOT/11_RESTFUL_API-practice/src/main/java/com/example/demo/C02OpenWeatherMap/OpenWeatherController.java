@@ -25,7 +25,7 @@ public class OpenWeatherController {
         String url = "https://api.openweathermap.org/data/2.5/weather";
         lat = "35.8";
         lon = "128.6";
-        String appid = "eeb24c2ff7258fcf9a81e91fe210a2a7";
+        String appid = System.getenv("OPENWEATHERMAP_API");
 
         URI uri = UriComponentsBuilder
                 .fromHttpUrl(url)

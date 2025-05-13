@@ -19,11 +19,11 @@ import java.util.List;
 public class OpenData02Controller {
 
     String url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
-    String serviceKey = "HuCVWyilOTqxMrP/q3s2wk0DZgsf/KeEnFylSDMmws0IyE8E5dSlPrZkXLWGh8M2G98YRViid4NmtXjVJuER4w==";
+    String serviceKey = System.getenv("KR_OPENDATA_API_KEY_DECODING");
     String pageNo = "1";
     String numOfRows = "10";
     String dataType = "JSON";
-    String base_date = "20250512";
+    String base_date = "20250513";
     String base_time = "0900";
     String nx = "60";
     String ny = "127";
