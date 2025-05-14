@@ -37,11 +37,16 @@ dependencies {
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.0'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
+	// Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.0'
 
 	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
 	implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.0'
+
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 
 
 

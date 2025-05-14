@@ -1,6 +1,7 @@
 package com.example.demo.C04Kakao;
 
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -27,10 +28,14 @@ public class C02KakaoLoginController {
 
     String REDIRECT_URI = "http://192.168.16.22:8090/kakao/callback";
 //    String REDIRECT_URI = "http://localhost:8090/kakao/callback";
-    String CLIENT_ID = "API키";
+    String CLIENT_ID = System.getenv("KAKAO_RESTAPI_KEY");;
     String RESPONSE_TYPE = "code";
     String LOGOUT_REDIRECT_URI = "http://192.168.16.22:8090/kakao/getCode";
 //    String LOGOUT_REDIRECT_URI = "http://localhost:8090/kakao/getCode";
+
+    public C02KakaoLoginController(Dotenv dotenv) {
+        this.CLIENT_ID = dotenv.get("REACT_APP_KAKAO_RESTAPI_KEY");
+    }
 
 
     // 인가 코드 받기

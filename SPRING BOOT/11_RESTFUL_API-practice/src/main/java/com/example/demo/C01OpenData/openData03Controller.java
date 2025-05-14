@@ -1,6 +1,7 @@
 package com.example.demo.C01OpenData;
 
 import com.example.demo.C01OpenData.bus.BUSResult;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,13 @@ import java.nio.charset.StandardCharsets;
 public class openData03Controller {
 
     @GetMapping("/bus/realtime")
-    public void bus_realtime() throws UnsupportedEncodingException {
+    public void bus_realtime(Dotenv dotenv) throws UnsupportedEncodingException {
         String url = "https://apis.data.go.kr/6270000/dbmsapi01/getRealtime";
-        String serviceKey = System.getenv("KR_OPENDATA_API_KEY_DECODING");
+        String serviceKey = dotenv.get("REACT_APP_KR_OPENDATA_API_KEY_DECODING");
         String bsId = "7001001600";
         String routeNo = "649";
+
+
 
         URI uri = UriComponentsBuilder
                 .fromHttpUrl(url)

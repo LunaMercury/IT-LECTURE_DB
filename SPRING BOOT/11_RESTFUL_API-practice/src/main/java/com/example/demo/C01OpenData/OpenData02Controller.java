@@ -1,5 +1,6 @@
 package com.example.demo.C01OpenData;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
@@ -19,7 +20,7 @@ import java.util.List;
 public class OpenData02Controller {
 
     String url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
-    String serviceKey = System.getenv("KR_OPENDATA_API_KEY_DECODING");
+    String serviceKey;
     String pageNo = "1";
     String numOfRows = "10";
     String dataType = "JSON";
@@ -27,6 +28,10 @@ public class OpenData02Controller {
     String base_time = "0900";
     String nx = "60";
     String ny = "127";
+
+    public OpenData02Controller(Dotenv dotenv) {
+        this.serviceKey = dotenv.get("REACT_APP_KR_OPENDATA_API_KEY_DECODING");
+    }
 
     @GetMapping("/forecast")
     public String forecast(Model model) {

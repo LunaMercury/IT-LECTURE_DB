@@ -1,6 +1,7 @@
 package com.example.demo.C01OpenData;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
@@ -20,9 +21,13 @@ import java.util.List;
 public class OpenData01Controller {
 
     String url = "https://apis.data.go.kr/6270000/service/rest/dgincident";
-    String serviceKey = System.getenv("KR_OPENDATA_API_KEY_DECODING");
+    String serviceKey;
     String pageNo = "1";
     String numOfRows = "10";
+
+    public OpenData01Controller(Dotenv dotenv) {
+        this.serviceKey = dotenv.get("REACT_APP_KR_OPENDATA_API_KEY_DECODING");
+    }
 
     @GetMapping("/incident")
     public void incident(Model model) {

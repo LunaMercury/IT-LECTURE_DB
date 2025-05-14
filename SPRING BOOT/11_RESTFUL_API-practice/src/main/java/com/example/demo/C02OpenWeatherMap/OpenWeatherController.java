@@ -1,5 +1,6 @@
 package com.example.demo.C02OpenWeatherMap;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,13 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("/open/weather")
 public class OpenWeatherController {
     @GetMapping("/get/{lat}/{lon}")
-    public ResponseEntity<OpenWeatherData> get(@PathVariable String lat, @PathVariable String lon) {
+    public ResponseEntity<OpenWeatherData> get(@PathVariable String lat, @PathVariable String lon, Dotenv dotenv) {
         log.info("GET /open/weather/get....");
 
         String url = "https://api.openweathermap.org/data/2.5/weather";
         lat = "35.8";
         lon = "128.6";
-        String appid = System.getenv("OPENWEATHERMAP_API");
+        String appid = dotenv.get("REACT_APP_KR_OPENDATA_API_KEY_DECODING");
 
         URI uri = UriComponentsBuilder
                 .fromHttpUrl(url)
