@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,10 +26,9 @@ public class SecurityConfig {
 //		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
         // 권한 체크
-//
         http.authorizeHttpRequests((auth) -> {
             auth.requestMatchers("/", "/join", "/login").permitAll(); // 모두 허용)
-            auth.requestMatchers("/user").hasAnyRole("USER", "MANAGER");
+            auth.requestMatchers("/user").hasAnyRole("USER", "MANAGER", "ADMIN");
             auth.requestMatchers("/manager").hasRole("MANAGER");
             auth.requestMatchers("/admin").hasRole("ADMIN");
             auth.anyRequest().authenticated();
@@ -41,7 +38,7 @@ public class SecurityConfig {
         // 로그인
         http.formLogin((login) -> {
             login.permitAll();
-            login.loginPage("/login");
+//            login.loginPage("/login");
 //            login.successHandler(new CustomLoginSuccessHandler()); // 인증 성공시
 //            login.failureHandler(new CustomLoginFailureHandler()); // 인증 실패시
         });

@@ -13,23 +13,16 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
-        (
-//                basePackages = "com.example.demo.domain.repository",
-                transactionManagerRef = "jpaTransactionManager"
-        )
 public class TxConfig {
-
-
     @Autowired
     private DataSource dataSource;
 
-    // 기본 TransactionManager
-    @Bean(name = "dataSourceTransactionManager")
-    public DataSourceTransactionManager transactionManager() {
-        //System.out.println("TX dataSrouce2 : " + dataSource2.toString());
-        return new DataSourceTransactionManager(dataSource);
-    }
+//    // 기본 TransactionManager
+//    @Bean(name = "dataSourceTransactionManager")
+//    public DataSourceTransactionManager transactionManager() {
+//        //System.out.println("TX dataSrouce2 : " + dataSource2.toString());
+//        return new DataSourceTransactionManager(dataSource);
+//    }
 
 
     //    JPA TransactionManager Settings
